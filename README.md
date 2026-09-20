@@ -11,6 +11,7 @@ Data Preparation
 Modelling
 Evaluation
 Interpretability and Risk
+
 1. Business Understanding
 
 The main objective was to develop a machine learning model that could support the first-stage assessment of loan applications.
@@ -115,7 +116,7 @@ F1-score	0.975
 ROC-AUC	0.999
 Confusion Matrix
 
-	Predicted Not Approved	Predicted Approved
+	
 Actual Not Approved	3,011	33
 Actual Approved	16	940
 
@@ -188,14 +189,8 @@ Scikit-learn
 XGBoost
 Jupyter Notebook
 GitHub
-Project Structure
-Loan-Approval-Prediction/
-│
-├── loan_approval_prediction.ipynb
-├── README.md
-└── data/
-    └── loan_data.csv
-Conclusion
+
+## Conclusion
 
 This project gave me practical experience applying the CRISP-DM process to a classification problem. I worked through data understanding, preprocessing, feature engineering, model comparison, hyperparameter tuning, evaluation, and model interpretation.
 
