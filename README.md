@@ -14,7 +14,7 @@ Interpretability and Risk
 
 1. Business Understanding
 
-The main objective was to develop a machine learning model that could support the first-stage assessment of loan applications.
+The main objective was to develop a machine learning model that could support the first stage assessment of loan applications.
 
 The project considered different costs for incorrect decisions:
 
@@ -74,6 +74,7 @@ The main steps were:
 
 Cleaned the Annual_Income variable.
 Separated the predictor variables (X) from the target variable (y).
+I dropped variables that are causing data leakage, Risk_Score, Interest_Rate, Base_Interest_Rate and Monthly_Loan_Payment
 Created three new financial ratios.
 Split the data into 80% training and 20% testing using stratification.
 Used median imputation for missing numerical values.
@@ -104,80 +105,12 @@ Its individual decision trees can be inspected to better understand the model.
 After comparing the models, I used the tuned Random Forest model for the final evaluation.
 
 5. Evaluation
+I selected the tuned Logistic Regression  because it is easier to understand than the Random Forest.It performed well on the test data and had a lower estimated business cost than the other strategies.Its performance was fairly consistent across different customer groups.The important features, such as debt-to-income ratio, income, and credit history, also make sense for loan approval.
 
-The tuned Random Forest model was evaluated on an unseen test set of 4,000 rows.
-
-Test Set Results
-Metric	Result
-Accuracy	0.988
-Precision	0.966
-Recall	0.983
-F1-score	0.975
-ROC-AUC	0.999
-Confusion Matrix
-
-	
-Actual Not Approved	3,011	33
-Actual Approved	16	940
-
-This means the model made relatively few incorrect predictions on the test data.
-
-Cost-Sensitive Analysis
-
-Using the cost proxy provided in the assignment:
-
-Scenario	Calculated Cost
-Random Forest	$1,778,000
-Always deny	$7,648,000
-Always approve	$152,200,000
-
-These dollar values are scenario-based business-cost proxies and should not be interpreted as actual realised financial losses.
-
-6. Interpretability and Risk
-
-I also examined the feature importance from the Random Forest model to understand which variables were most useful to the model.
-
-Most Important Features
-Feature	Importance
-Risk_Score	0.377
-Loan_To_Annual_Income	0.134
-Monthly_Income	0.093
-Total_Debt_To_Income_Ratio	0.093
-Annual_Income	0.082
-Payment_To_Monthly_Income	0.061
-
-These values show how much the model relied on each variable when making predictions. However, feature importance does not mean that a variable causes the loan approval decision.
-
-I also considered differences in model performance across different employment and income groups. Some groups had smaller sample sizes, so subgroup results need to be interpreted carefully.
 
 7. Main Limitation
 
-The most important limitation of this project is the definition of the target variable.
-
-The model predicts historical loan approval decisions, rather than whether a borrower actually defaulted on a loan.
-
-This means:
-
-The model is learning from historical approval decisions.
-The $8,000 and $50,000 values are business-cost proxies from the assignment.
-These amounts should not be treated as actual financial losses.
-The model should not be described as a fully validated loan default-risk model because the dataset does not contain a true loan default outcome.
-
-Therefore, the results should be interpreted as a model for predicting historical loan approval decisions, rather than predicting actual future loan defaults.
-
-Outcome
-
-After comparing and tuning the models, the Random Forest model was selected for the final evaluation.
-
-On the unseen test set, it achieved:
-
-98.8% accuracy
-96.6% precision
-98.3% recall
-97.5% F1-score
-99.9% ROC-AUC
-
-The results show strong predictive performance on this dataset. However, the target limitation should be considered when interpreting the model for real-world lending or default-risk applications.
+The model predicts past loan approval decisions, not actual loan defaults.The $8,000 and $50,000 costs are estimates used in this project.The model should be tested with real loan default data before being used.It should also be checked for fairness and possible bias.
 
 Tools and Technologies
 Python
@@ -194,4 +127,6 @@ GitHub
 
 This project gave me practical experience applying the CRISP-DM process to a classification problem. I worked through data understanding, preprocessing, feature engineering, model comparison, hyperparameter tuning, evaluation, and model interpretation.
 
-The project also showed me the importance of considering class imbalance, business costs, interpretability, and target-variable limitations when developing machine learning models.
+The project also showed me the importance of considering class imbalance, business costs, interpretability, and target variable limitations when developing machine learning models.
+
+The tuned Logistic Regression model is  the best performing model in my study, achieving 93.3% accuracy, preession = 87.5% , recall = 83.9% ,  F1-score, = 95.6% and 97.9% ROC-AUC on the test set.
